@@ -1,3 +1,12 @@
 #miModal{
     background-color: rgba(0,0,0, 0.5) !important;
 }
+.btn-login{
+    background-color: #e6516b;
+    color: white;
+    margin-top: 1%;
+}
+.btn-login:hover {
+            background-color: #e67171;
+            color: white;
+        }

@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { ModalRegister } from "../components/ModalRegister.jsx";
 import { createUser } from "../service/user.js";
 import { getListUsers } from "../service/user.js";
+import { element } from "prop-types";
 
 export const Login = () => {
   const [showRegister,setShowRegister] = useState(false);
@@ -50,15 +51,16 @@ export const Login = () => {
     console.log(e.target.value);
     
     setStateListaUsersPer(e.target.value)
-    onFilter(stateListUsersPer)
+    //onFilter(stateListUsersPer)
+    onFilter(e.target.value)
   }
   const onFilter = async (user) => {
-    const filtro = stateListUsers.filter(element=>element.slug.includes(user))
+    const filtro = stateListUsers.filter(element=>element.slug.toLowerCase().includes(user))
 setStateFilterUsers(filtro);
 console.log(user);
-console.log(stateListUsersPer);
+//console.log(stateListUsersPer);
     if(user=== ''){
-      console.log('ingreso ccuando limpio input');
+      console.log('ingreso cuando limpio input');
       
       setStateFilterUsers([])}
   }
@@ -68,6 +70,13 @@ console.log(stateListUsersPer);
     
      setStateListUsers(result)
   }
+  
+  const selectInput = (name) =>{
+setStateListaUsersPer(name.slug)
+console.log('hola clic al seleccionar',name);
+setStateFilterUsers([])
+
+  }
     return (
         <div className="text-center mt-5">
             <h1>Agenda de contactos</h1>
@@ -76,11 +85,14 @@ console.log(stateListUsersPer);
             </p>
             <form>
               <div className="row d-flex">
-                <div><label>usuario</label></div>
-                <div><input type="text" onChange={handleChangeInput}/></div>
+                {/* <div><label>usuario</label></div> */}
+                <div><input type="text" onChange={handleChangeInput} value={stateListUsersPer} placeholder="Usuario"/></div>
+                
                 <div>
-                  {stateFilterUsers.map((element,index)=>(<div key={index}>{element.slug}</div>))}
+                  {stateFilterUsers.map((element,index)=>(<div key={index} onClick={()=>selectInput(element)}>{element.slug}</div>))}
                 </div>
+                <div><button className="btn btn-login">Iniciar sesion</button></div>
+                {/* <div><button className="btn btn-danger">Iniciar sesion</button></div> */}
               </div>
             </form>
                 <div>
