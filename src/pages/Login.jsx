@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { ModalRegister } from "../components/ModalRegister.jsx";
 import { createUser } from "../service/user.js";
 import { getListUsers } from "../service/user.js";
-import { element } from "prop-types";
+import { Link } from "react-router-dom";
 
 export const Login = () => {
   const [showRegister,setShowRegister] = useState(false);
@@ -48,10 +48,7 @@ export const Login = () => {
     setStateUser(e.target.value)
   }
   const handleChangeInput = (e) =>{
-    console.log(e.target.value);
-    
     setStateListaUsersPer(e.target.value)
-    //onFilter(stateListUsersPer)
     onFilter(e.target.value)
   }
   const onFilter = async (user) => {
@@ -91,7 +88,12 @@ setStateFilterUsers([])
                 <div>
                   {stateFilterUsers.map((element,index)=>(<div key={index} onClick={()=>selectInput(element)}>{element.slug}</div>))}
                 </div>
-                <div><button className="btn btn-login">Iniciar sesion</button></div>
+                <div>
+                  {/* <Link to="/home"> */}
+                  <Link to={`/home/${stateListUsersPer}`}>
+                  <button className="btn btn-login">Iniciar sesion</button>
+                  </Link>
+                </div>
                 {/* <div><button className="btn btn-danger">Iniciar sesion</button></div> */}
               </div>
             </form>
