@@ -21,14 +21,10 @@ export const Login = () => {
  },[])
 
   const registerUser = () =>{
-    console.log("hola modal crear user");
     setShowRegister(true);
   }
 
   const agregarUsuario = async (e) =>{
-    console.log("clic en agregar");
-    console.log(stateUser);
-    
     e.preventDefault();
     setShowRegister(false);
     try {
@@ -47,33 +43,30 @@ export const Login = () => {
   const handleChange = (e) =>{
     setStateUser(e.target.value)
   }
+
   const handleChangeInput = (e) =>{
     setStateListaUsersPer(e.target.value)
     onFilter(e.target.value)
   }
+
   const onFilter = async (user) => {
     const filtro = stateListUsers.filter(element=>element.slug.toLowerCase().includes(user))
-setStateFilterUsers(filtro);
-console.log(user);
-//console.log(stateListUsersPer);
+    setStateFilterUsers(filtro);
     if(user=== ''){
-      console.log('ingreso cuando limpio input');
-      
-      setStateFilterUsers([])}
+      setStateFilterUsers([])
+    }
   }
+
   const getusers = async() =>{
-    const result = await getListUsers();
-    console.log(result);
-    
-     setStateListUsers(result)
+  const result = await getListUsers();
+    setStateListUsers(result)
   }
   
   const selectInput = (name) =>{
-setStateListaUsersPer(name.slug)
-console.log('hola clic al seleccionar',name);
-setStateFilterUsers([])
-
+    setStateListaUsersPer(name.slug)
+    setStateFilterUsers([])
   }
+
     return (
         <div className="text-center mt-5">
             <h1>Agenda de contactos</h1>
@@ -82,23 +75,20 @@ setStateFilterUsers([])
             </p>
             <form>
               <div className="row d-flex">
-                {/* <div><label>usuario</label></div> */}
                 <div><input type="text" onChange={handleChangeInput} value={stateListUsersPer} placeholder="Usuario"/></div>
                 
                 <div>
                   {stateFilterUsers.map((element,index)=>(<div key={index} onClick={()=>selectInput(element)}>{element.slug}</div>))}
                 </div>
                 <div>
-                  {/* <Link to="/home"> */}
                   <Link to={`/home/${stateListUsersPer}`}>
                   <button className="btn btn-login">Iniciar sesion</button>
                   </Link>
                 </div>
-                {/* <div><button className="btn btn-danger">Iniciar sesion</button></div> */}
               </div>
             </form>
-                <div>
-                <label>¿No tienes una cuenta?&nbsp;<a style={{cursor: "pointer"}} onClick={registerUser}>Regístrate.</a></label>
+                <div style={{marginTop:"2%"}}>
+                <label>¿No tienes una cuenta?&nbsp;<a style={{cursor: "pointer",color:"#e6516b", fontWeight:"500"}} onClick={registerUser}>Regístrate.</a></label>
               </div>
             <ModalRegister 
               show={showRegister} 
