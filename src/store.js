@@ -30,3 +30,43 @@ export default function storeReducer(store, action = {}) {
       throw Error('Unknown action.');
   }    
 }
+
+// export const initialStore=()=>{
+//    return {
+//     showRegister: false,
+//     stateUser: "",
+//     stateListUsers: [],
+//     stateFilterUsers: [],
+//     stateListUsersPer: "",
+//    }
+// }
+
+// export default function storeReducer(store, action ) {
+//     switch (action.type) {
+//       case "registerUser":
+//           return {...store,showRegister:true}
+//       case "closeModal":
+//           return {...store,showRegister:false}
+
+//       case "handleChange":
+//         const event = action.payload;
+//           return {...store,stateUser: event.target.value}
+
+//       case "selectInput": 
+//         const name = action.payload;
+//         return {...store,stateListUsersPer: name.slug,stateFilterUsers:[]}
+
+//       case "onFilter":
+//         const user = action.payload;
+//         const filtro = stateListUsers.filter(element=>element.slug.toLowerCase().includes(user))
+//         if(user = ''){
+//           return { ...store, stateFilterUsers:[]}
+//         }
+//         return {...store,stateFilterUsers: filtro}
+      
+//       case "handleChangeInput":
+//         const input = action.payload;
+        
+//       default:
+//     }
+// }

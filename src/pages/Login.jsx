@@ -8,11 +8,6 @@ import { getListUsers } from "../service/user.js";
 import { Link } from "react-router-dom";
 
 export const Login = () => {
-  const [showRegister,setShowRegister] = useState(false);
-  const [stateUser,setStateUser] = useState('');
-  const [stateListUsers, setStateListUsers] = useState([]);
-  const [stateFilterUsers, setStateFilterUsers] = useState([]);
-  const [stateListUsersPer, setStateListaUsersPer] = useState('');
 
   const {store, dispatch} =useGlobalReducer()
 
@@ -20,9 +15,9 @@ export const Login = () => {
   getusers();
  },[])
 
-  const registerUser = () =>{
-    setShowRegister(true);
-  }
+  // const registerUser = () =>{
+  //   setShowRegister(true);
+  // }
 
   const agregarUsuario = async (e) =>{
     e.preventDefault();
@@ -36,36 +31,40 @@ export const Login = () => {
     }
   }
 
-  const closeModal = () =>{
-    setShowRegister(false)
-  }
+  // const closeModal = () =>{
+  //   setShowRegister(false)
+  // }
 
-  const handleChange = (e) =>{
-    setStateUser(e.target.value)
-  }
+  // const handleChange = (e) =>{
+  //   setStateUser(e.target.value)
+  // }
 
+  // const handleChangeInput = (e) =>{
+  //   setStateListaUsersPer(e.target.value)
+  //   onFilter(e.target.value)
+  // }
   const handleChangeInput = (e) =>{
     setStateListaUsersPer(e.target.value)
     onFilter(e.target.value)
   }
 
-  const onFilter = async (user) => {
-    const filtro = stateListUsers.filter(element=>element.slug.toLowerCase().includes(user))
-    setStateFilterUsers(filtro);
-    if(user=== ''){
-      setStateFilterUsers([])
-    }
-  }
+  // const onFilter = (user) => {
+  //   const filtro = stateListUsers.filter(element=>element.slug.toLowerCase().includes(user))
+  //   setStateFilterUsers(filtro);
+  //   if(user=== ''){
+  //     setStateFilterUsers([])
+  //   }
+  // }
 
   const getusers = async() =>{
   const result = await getListUsers();
     setStateListUsers(result)
   }
   
-  const selectInput = (name) =>{
-    setStateListaUsersPer(name.slug)
-    setStateFilterUsers([])
-  }
+  // const selectInput = (name) =>{
+  //   setStateListaUsersPer(name.slug)
+  //   setStateFilterUsers([])
+  // }
 
     return (
         <div className="text-center mt-5">
