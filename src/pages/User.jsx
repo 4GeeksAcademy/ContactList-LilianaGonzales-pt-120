@@ -18,6 +18,7 @@ export const User = () => {
 
  useEffect(()=>{
   getusers();
+  localStorage.clear();
  },[])
 
   const registerUser = () =>{
@@ -81,9 +82,15 @@ export const User = () => {
                   {stateFilterUsers.map((element,index)=>(<div key={index} onClick={()=>selectInput(element)}>{element.slug}</div>))}
                 </div>
                 <div>
-                  <Link to={`/home/${stateListUsersPer}`}>
-                  <button className="btn btn-login">Iniciar sesion</button>
-                  </Link>
+                  {
+                    stateListUsers.some(producto => producto.slug === stateListUsersPer)?
+                    <Link to={`/home/${stateListUsersPer}`}>
+                    <button className="btn btn-login">Iniciar sesion</button>
+                    </Link>:
+                    <Link to="/login">
+                    <button className="btn btn-login">Iniciar sesion</button>
+                    </Link>
+                  }
                 </div>
               </div>
             </form>

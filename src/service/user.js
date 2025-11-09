@@ -31,3 +31,14 @@ export const createUser = async (user) =>{
         
     }
  }
+// export const deleteUser = async ()=>{
+//     try {
+//         const request = fetch(``,{
+//           method:"DELETE",
+
+//         })
+        
+//     } catch (error) {
+        
+//     }
+// }
