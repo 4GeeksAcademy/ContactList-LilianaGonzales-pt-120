@@ -31,6 +31,7 @@ export const User = () => {
     try {
       const result = await createUser(stateUser);
       console.log(result);
+      getusers();
       setStateUser('')
     } catch (error) {
       

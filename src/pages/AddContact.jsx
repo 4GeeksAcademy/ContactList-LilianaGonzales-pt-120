@@ -1,49 +1,109 @@
-import { use } from "react";
+import { use, useState } from "react";
 import rigoImageUrl from "../assets/img/rigo-baby.jpg";
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
 import { Link, useParams } from "react-router-dom";
+import { createContact } from "../service/contact.js";
 
 export const AddContact = () => {
 
-let nombre = localStorage.getItem('nombreUsuario');
-console.log(nombre);
+    const [values, setValues] = useState({
+        nombre:"",
+        email:"",
+        telefono:"",
+        direccion:""
+    });
+    let nombreUser = localStorage.getItem('nombreUsuario');
+    const {store, dispatch} =useGlobalReducer();
 
-  const {store, dispatch} =useGlobalReducer()
+    const handleChange = (event) => {
+        const {name,value} = event.target;
+        setValues({
+            ...values,[name]:value,
+        })
+    }
 
-//   const params =useParams();
-//   console.log(params);
-    
+    const agregarContacto = async (e) =>{
+        e.preventDefault();
+        const body = {
+            name:values.nombre,
+            phone:values.telefono,
+            email:values.email,
+            address:values.direccion
+        }
+        try {
+        const result = await createContact(nombreUser,body);
+        console.log(result);
+        setValues({nombre:"",
+        email:"",
+        telefono:"",
+        direccion:""})
+        } catch (error) {
+        
+        }
+
+        console.log(values);
+        
+    }
+
 
     return (
          <div className="container-fluid">
             <div className="d-flex justify-content-center">
                 <div className="col-lg-8 mt-5">
-                    <form>
+                    <form  action="" onSubmit={agregarContacto}>
                         <div>
-                            <h1 className="titulo-agregar">Add new contact</h1>
+                            <h1 className="titulo-agregar">Agregar nuevo contacto</h1>
                         </div>
                         <div className="mb-3">
-                            <label for="exampleFormControlInput1" className="form-label">Full Name</label>
-                            <input type="email" className="form-control" id="exampleFormControlInput1" placeholder="name@example.com"/>
+                            <label for="exampleFormControlInput1" className="form-label">Nombre</label>
+                            <input 
+                                type="text" 
+                                className="form-control" 
+                                id="exampleFormControlInput1"
+                                name="nombre" 
+                                placeholder="Ingrese nombre"
+                                value={values.nombre}
+                                onChange= {handleChange}/>
                         </div>
                         <div className="mb-3">
                             <label for="exampleFormControlInput1" className="form-label">Email</label>
-                            <input type="email" className="form-control" id="exampleFormControlInput1" placeholder="name@example.com"/>
+                            <input 
+                                type="email" 
+                                className="form-control" 
+                                id="exampleFormControlInput1" 
+                                name="email" 
+                                placeholder="Ingrese email"
+                                value={values.email}
+                                onChange= {handleChange}/>
                         </div>
                         <div className="mb-3">
-                            <label for="exampleFormControlInput1" className="form-label">Phone</label>
-                            <input type="email" className="form-control" id="exampleFormControlInput1" placeholder="name@example.com"/>
+                            <label for="exampleFormControlInput1" className="form-label">Telefono</label>
+                            <input 
+                                type="text" 
+                                className="form-control" 
+                                id="exampleFormControlInput1" 
+                                name="telefono" 
+                                placeholder="Ingrese telefono"
+                                value={values.telefono}
+                                onChange= {handleChange}/>
                         </div>
                         <div className="mb-3">
-                            <label for="exampleFormControlInput1" className="form-label">Address</label>
-                            <input type="email" className="form-control" id="exampleFormControlInput1" placeholder="name@example.com"/>
+                            <label for="exampleFormControlInput1" className="form-label">Direccion</label>
+                            <input 
+                                type="text" 
+                                className="form-control" 
+                                id="exampleFormControlInput1"
+                                name="direccion" 
+                                placeholder="Ingrese direccion"
+                                value={values.direccion}
+                                onChange= {handleChange}/>
                         </div>
                         <div className="d-grid gap-2">
-                            <button className="btn btn-primary" type="submit" >Save</button>
+                            <button className="btn btn-primary" type="submit" onClick={agregarContacto} >Guardar</button>
                         </div>
                     </form>
                     <div style={{marginTop:"10px"}}>
-                    <Link to={`/home/${nombre}`}>
+                    <Link to={`/home/${nombreUser}`}>
                     <button className="btn btn-danger">Atras</button>
                     </Link>
                     </div>

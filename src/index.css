@@ -16,3 +16,22 @@ h1{
 .titulo-agregar{
     text-align: center;
 }
+.delete-user{
+    color: red;
+    font-size: 20px;
+    cursor: pointer;
+}
+.close-sesion{
+    font-size: 20px;
+}
+ul li{
+    border: 2px solid #e9ecef;
+    list-style: none;
+    padding: 5px;
+    color: rgb(172 163 163);
+    font-size: 20px;
+    padding-left: 20px;
+}
+.delete{
+    cursor: pointer;
+}
