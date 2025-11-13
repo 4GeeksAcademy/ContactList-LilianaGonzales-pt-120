@@ -48,3 +48,20 @@ export const deleteContact = async (user,idContact)=>{
         console.log(error);
     }
 }
+
+export const updateContact = async(user,id,body)=>{
+    try {
+        const request = await fetch(`https://playground.4geeks.com/contact/agendas/${user}/contacts/${id}`,{
+            method: "PUT",
+            headers: {
+                "accept": "application/json",
+                "Content-Type": "application/json"
+            },
+            body:JSON.stringify(body),
+        });
+        const response = await request.json();
+        return response
+    } catch (error) {
+        console.log(error);
+    }
+}
