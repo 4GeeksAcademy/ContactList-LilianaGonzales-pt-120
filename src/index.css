@@ -2,7 +2,7 @@
     background-color: rgba(0,0,0, 0.5) !important;
 }
 .btn-login{
-    background-color: #e6516b;
+    background-color: #fd5e8d;
     color: white;
     margin-top: 1%;
 }
@@ -46,4 +46,41 @@ ul li{
 ul{
     padding-left: 7rem;
     padding-right: 7rem;
+}
+.imagen{
+    width: 25%;
+}
+.nav{
+    background-color: #578a80 !important;
+}
+/* .fondo {
+    background: url('/src/assets/img/fondo1.jpg') no-repeat center bottom;
+    background-size: cover;
+      width: 100%;
+      height: 60vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: start;
+      align-items: center;
+      text-align: center;
+      padding-top: 11vh;
+}*/
+.fondo {
+      /* padding: 20px;
+      width: 100%; 
+      margin: 10px 0;
+      width: fit-content;
+      font-weight: bold;
+      font-size: 10vh !important; */
+      text-align: center;
+      padding-top: 15%;
+} 
+.textWelcome{
+    color: #fd5e8d;
+    font-family: serif;
+}
+.link{
+    color: #83d8c7;
+    font-weight: 600;
+    font-size: 20px;
 }

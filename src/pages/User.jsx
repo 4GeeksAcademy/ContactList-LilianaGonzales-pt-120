@@ -1,6 +1,8 @@
 import rigoImageUrl from "../assets/img/rigo-baby.jpg";
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
 import agendaImage from "../assets/img/imagen-agenda1.jpg";
+import agendaImage2 from "../assets/img/imagen-agenda2.png";
+import agendaImage3 from "../assets/img/imagen-agenda3.png";
 import { useEffect, useState } from "react";
 import { ModalRegister } from "../components/ModalRegister.jsx";
 import { createUser } from "../service/user.js";
@@ -71,9 +73,9 @@ export const User = () => {
 
     return (
         <div className="text-center mt-5">
-            <h1>Agenda de contactos</h1>
+            {/* <h1>Agenda de contactos</h1> */}
             <p>
-                <img src={agendaImage} />
+                <img className="imagen" src={agendaImage3} />
             </p>
             <form>
               <div className="row d-flex">

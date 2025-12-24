@@ -21,6 +21,8 @@ export const Home = () => {
   const {store, dispatch} =useGlobalReducer()
 
   const params =useParams();
+  console.log(params);
+  
   localStorage.setItem('nombreUsuario', params.name);
   
   const getContact = async() => {

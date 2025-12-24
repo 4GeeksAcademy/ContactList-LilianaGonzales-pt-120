@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 
 export const Navbar = () => {
 	const [nombre, setNombre] = useState('');
-	let name = localStorage.getItem('nombreUsuario');
+	const name = localStorage.getItem('nombreUsuario');
 	console.log(name);
 	const params =useParams();
 	const navigate = useNavigate();
@@ -32,7 +32,8 @@ export const Navbar = () => {
 			icon: "success"
 			})
 			setTimeout(() => {
-						navigate('/login')
+				localStorage.clear();
+						navigate('/')
 					}, 1000);
 		}
 		});
@@ -48,9 +49,13 @@ export const Navbar = () => {
 		}
 	}
 	
+	const closeSesion = () =>{
+		navigate("/")
+		localStorage.clear();
+	}
 
 	return (
-		<nav className="navbar navbar-light bg-light">
+		<nav className="navbar navbar-light bg-light nav">
 			<div className="container" style={{paddingRight:"0px"}}>
 				{/*<Link to="/">
 					<span className="navbar-brand mb-0 h1">React Boilerplate</span>
@@ -60,10 +65,21 @@ export const Navbar = () => {
 						<button className="btn btn-primary">Check the Context in action</button>
 					</Link>
 				</div> */}
-				{params.name?<h2>Agenda de contactos de {params.name}</h2>:<h2>Agenda de contactos de {name}</h2>}
+				{/* {params.name?<h2>Agenda de contactos de {params.name}</h2>:<h2>Agenda de contactos de {name}</h2>} */}
+					<h2 style={{color:"white", fontFamily:"serif"}}>Tu Agenda de contactos</h2>
+				 
 				<div className="d-flex">
-					<div><Link to="/login"><i className="fa-solid fa-arrow-right-from-bracket close-sesion" title="Cerrar Sesion"></i></Link></div>
+					{/* {params.name?<>
+					<div><i className="fa-solid fa-arrow-right-from-bracket close-sesion" title="Cerrar Sesion" onClick={closeSesion}></i></div>
 					<div style={{marginLeft:"20px"}}><i className="fa-solid fa-user-slash delete-user" title="Eliminar usuario" onClick={deleteUsers}></i></div>
+					</>:null} */}
+					{(params.name || name) && (
+						<>
+						<div><i className="fa-solid fa-arrow-right-from-bracket close-sesion" title="Cerrar Sesion" onClick={closeSesion}></i></div>
+						<div style={{marginLeft:"20px"}}><i className="fa-solid fa-user-slash delete-user" title="Eliminar usuario" onClick={deleteUsers}></i></div>
+						</>
+					
+					)}
 				</div>
 
 			</div>
