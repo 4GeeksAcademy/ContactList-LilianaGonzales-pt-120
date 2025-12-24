@@ -1,6 +1,6 @@
 export const initialStore=()=>{
   return{
-    message: null,
+   /* message: null,
     todos: [
       {
         id: 1,
@@ -12,13 +12,22 @@ export const initialStore=()=>{
         title: "Do my homework",
         background: null,
       }
-    ]
+    ]*/
+
+      showRegister: false,
+      stateUser: "",
+      stateListUsers: [],
+      stateFilterUsers: [],
+      stateListUsersPer: "",
+
   }
+
+
 }
 
 export default function storeReducer(store, action = {}) {
   switch(action.type){
-    case 'add_task':
+    /*case 'add_task':
 
       const { id,  color } = action.payload
 
@@ -27,7 +36,23 @@ export default function storeReducer(store, action = {}) {
         todos: store.todos.map((todo) => (todo.id === id ? { ...todo, background: color } : todo))
       };
     default:
-      throw Error('Unknown action.');
+      throw Error('Unknown action.');*/
+
+      case 'setStateUser':    
+          return {...store, stateUser: action.payload}   
+      case 'setStateListUsers':
+          return {...store, stateListUsers: action.payload}    
+      case "setShowRegister":    
+          console.log("Has entrado al caso de setShowRegister")
+          // return {...store, showRegister : action.payload.show, stateUser: action.payload.user}  
+          return {...store, showRegister : action.payload} 
+      case "setStateFilterUsers":
+          return store    
+      case "setStateListUsersPer":
+          return {...store, stateListUsersPer: action.payload}    
+      default:
+          return store
+
   }    
 }
 

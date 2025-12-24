@@ -7,15 +7,15 @@ import { useEffect, useState } from "react";
 import { ModalRegister } from "../components/ModalRegister.jsx";
 import { createUser } from "../service/user.js";
 import { getListUsers } from "../service/user.js";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const User = () => {
-  const [showRegister,setShowRegister] = useState(false);
+  //const [showRegister,setShowRegister] = useState(false);
   const [stateUser,setStateUser] = useState('');
   const [stateListUsers, setStateListUsers] = useState([]);
   const [stateFilterUsers, setStateFilterUsers] = useState([]);
-  const [stateListUsersPer, setStateListaUsersPer] = useState('');
-
+  //const [stateListUsersPer, setStateListUsersPer] = useState('');
+  const navigate = useNavigate();
   const {store, dispatch} =useGlobalReducer()
 
  useEffect(()=>{
@@ -24,12 +24,14 @@ export const User = () => {
  },[])
 
   const registerUser = () =>{
-    setShowRegister(true);
+    //setShowRegister(true);
+    dispatch({type:"setShowRegister", payload:true})
   }
 
   const agregarUsuario = async (e) =>{
     e.preventDefault();
-    setShowRegister(false);
+    //setShowRegister(false);
+    dispatch({type:"setShowRegister", payload:false})
     try {
       const result = await createUser(stateUser);
       console.log(result);
@@ -41,15 +43,17 @@ export const User = () => {
   }
 
   const closeModal = () =>{
-    setShowRegister(false)
+    //setShowRegister(false)
+    dispatch({type:"setShowRegister", payload:false})
   }
 
   const handleChange = (e) =>{
-    setStateUser(e.target.value)
+    setStateUser(e.target.value) 
   }
 
   const handleChangeInput = (e) =>{
-    setStateListaUsersPer(e.target.value)
+    // setStateListUsersPer(e.target.value)
+    dispatch({type:"setStateListUsersPer", payload:e.target.value})
     onFilter(e.target.value)
   }
 
@@ -67,8 +71,14 @@ export const User = () => {
   }
   
   const selectInput = (name) =>{
-    setStateListaUsersPer(name.slug)
+    //setStateListUsersPer(name.slug)
+    dispatch({type:"setStateListUsersPer", payload:name.slug})
     setStateFilterUsers([])
+  }
+  const inicioSesion = () =>{
+    navigate(`/home/${store.stateListUsersPer}`)
+    dispatch({type:"setStateListUsersPer", payload:''})
+    
   }
 
     return (
@@ -79,17 +89,23 @@ export const User = () => {
             </p>
             <form>
               <div className="row d-flex">
-                <div><input type="text" onChange={handleChangeInput} value={stateListUsersPer} placeholder="Usuario"/></div>
+                <div><input type="text" onChange={handleChangeInput} value={store.stateListUsersPer} placeholder="Usuario"/></div>
                 
                 <div>
                   {stateFilterUsers.map((element,index)=>(<div key={index} onClick={()=>selectInput(element)}>{element.slug}</div>))}
                 </div>
                 <div>
                   {
-                    stateListUsers.some(producto => producto.slug === stateListUsersPer)?
-                    <Link to={`/home/${stateListUsersPer}`}>
-                    <button className="btn btn-login">Iniciar sesion</button>
-                    </Link>:
+                    stateListUsers.some(user => user.slug === store.stateListUsersPer)?
+                    // <Link to={`/home/${store.stateListUsersPer}`}>
+                    // <button className="btn btn-login">Iniciar sesion</button>
+                    // </Link>:
+                    // <Link to="/login">
+                    // <button className="btn btn-login">Iniciar sesion</button>
+                    // </Link>
+                    
+                    <button className="btn btn-login" onClick={inicioSesion}>Iniciar sesion</button>
+                    :
                     <Link to="/login">
                     <button className="btn btn-login">Iniciar sesion</button>
                     </Link>
@@ -101,7 +117,7 @@ export const User = () => {
                 <label>¿No tienes una cuenta?&nbsp;<a style={{cursor: "pointer",color:"#e6516b", fontWeight:"500"}} onClick={registerUser}>Regístrate.</a></label>
               </div>
             <ModalRegister 
-              show={showRegister} 
+              show={store.showRegister} 
               title="Registro de Usuario" 
               closeModal={closeModal} 
               createUser={agregarUsuario}
