@@ -11,7 +11,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 export const User = () => {
   //const [showRegister,setShowRegister] = useState(false);
-  const [stateUser,setStateUser] = useState('');
+  //const [stateUser,setStateUser] = useState('');
   const [stateListUsers, setStateListUsers] = useState([]);
   const [stateFilterUsers, setStateFilterUsers] = useState([]);
   //const [stateListUsersPer, setStateListUsersPer] = useState('');
@@ -33,10 +33,12 @@ export const User = () => {
     //setShowRegister(false);
     dispatch({type:"setShowRegister", payload:false})
     try {
-      const result = await createUser(stateUser);
+      // const result = await createUser(stateUser);
+      const result = await createUser(store.stateUser);
       console.log(result);
       getusers();
-      setStateUser('')
+      // setStateUser('')
+      dispatch({type:"setStateUser", payload:''})
     } catch (error) {
       
     }
@@ -48,7 +50,8 @@ export const User = () => {
   }
 
   const handleChange = (e) =>{
-    setStateUser(e.target.value) 
+    //setStateUser(e.target.value)
+    dispatch({type:"setStateUser", payload:e.target.value})
   }
 
   const handleChangeInput = (e) =>{
@@ -89,7 +92,7 @@ export const User = () => {
             </p>
             <form>
               <div className="row d-flex">
-                <div><input type="text" onChange={handleChangeInput} value={store.stateListUsersPer} placeholder="Usuario"/></div>
+                <div><input className="inputName" id="inputName" type="text" onChange={handleChangeInput} value={store.stateListUsersPer} placeholder="Usuario"/></div>
                 
                 <div>
                   {stateFilterUsers.map((element,index)=>(<div key={index} onClick={()=>selectInput(element)}>{element.slug}</div>))}

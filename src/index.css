@@ -84,3 +84,13 @@ ul{
     font-weight: 600;
     font-size: 20px;
 }
+.inputName{
+    padding-left: 4px;
+    border: 2px solid #80808057;
+    border-radius: 7px;
+    outline: none;
+}
+.inputName:focus{
+    border-color: rgb(110, 108, 108);
+    box-shadow: 0 0 0 3px #80808057;
+}

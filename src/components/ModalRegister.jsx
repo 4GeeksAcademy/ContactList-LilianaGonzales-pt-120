@@ -14,8 +14,8 @@ if(!show) return null;
         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={closeModal}></button>
       </div>
       <div className="modal-body">
-        <label>Nombre de usuario</label>
-        <input type="text" onChange={handleChange}/>
+        <label style={{paddingRight:"4px"}} for="input1">Nombre de usuario </label>
+        <input className="inputName" id="input1" type="text" onChange={handleChange}/>
         
       </div>
       <div className="modal-footer">
