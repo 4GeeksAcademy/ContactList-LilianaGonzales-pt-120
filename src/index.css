@@ -23,6 +23,7 @@ h1{
 }
 .close-sesion{
     font-size: 20px;
+    cursor: pointer;
 }
 ul li{
     border: 2px solid #e9ecef;

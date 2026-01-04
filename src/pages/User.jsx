@@ -1,7 +1,5 @@
-import rigoImageUrl from "../assets/img/rigo-baby.jpg";
+
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
-import agendaImage from "../assets/img/imagen-agenda1.jpg";
-import agendaImage2 from "../assets/img/imagen-agenda2.png";
 import agendaImage3 from "../assets/img/imagen-agenda3.png";
 import { useEffect, useState } from "react";
 import { ModalRegister } from "../components/ModalRegister.jsx";
@@ -10,11 +8,8 @@ import { getListUsers } from "../service/user.js";
 import { Link, useNavigate } from "react-router-dom";
 
 export const User = () => {
-  //const [showRegister,setShowRegister] = useState(false);
-  //const [stateUser,setStateUser] = useState('');
   const [stateListUsers, setStateListUsers] = useState([]);
   const [stateFilterUsers, setStateFilterUsers] = useState([]);
-  //const [stateListUsersPer, setStateListUsersPer] = useState('');
   const navigate = useNavigate();
   const {store, dispatch} =useGlobalReducer()
 
@@ -24,20 +19,16 @@ export const User = () => {
  },[])
 
   const registerUser = () =>{
-    //setShowRegister(true);
     dispatch({type:"setShowRegister", payload:true})
   }
 
   const agregarUsuario = async (e) =>{
     e.preventDefault();
-    //setShowRegister(false);
     dispatch({type:"setShowRegister", payload:false})
     try {
-      // const result = await createUser(stateUser);
       const result = await createUser(store.stateUser);
       console.log(result);
       getusers();
-      // setStateUser('')
       dispatch({type:"setStateUser", payload:''})
     } catch (error) {
       
@@ -45,17 +36,14 @@ export const User = () => {
   }
 
   const closeModal = () =>{
-    //setShowRegister(false)
     dispatch({type:"setShowRegister", payload:false})
   }
 
   const handleChange = (e) =>{
-    //setStateUser(e.target.value)
     dispatch({type:"setStateUser", payload:e.target.value})
   }
 
   const handleChangeInput = (e) =>{
-    // setStateListUsersPer(e.target.value)
     dispatch({type:"setStateListUsersPer", payload:e.target.value})
     onFilter(e.target.value)
   }
@@ -74,7 +62,6 @@ export const User = () => {
   }
   
   const selectInput = (name) =>{
-    //setStateListUsersPer(name.slug)
     dispatch({type:"setStateListUsersPer", payload:name.slug})
     setStateFilterUsers([])
   }
@@ -86,7 +73,6 @@ export const User = () => {
 
     return (
         <div className="text-center mt-5">
-            {/* <h1>Agenda de contactos</h1> */}
             <p>
                 <img className="imagen" src={agendaImage3} />
             </p>
@@ -100,13 +86,6 @@ export const User = () => {
                 <div>
                   {
                     stateListUsers.some(user => user.slug === store.stateListUsersPer)?
-                    // <Link to={`/home/${store.stateListUsersPer}`}>
-                    // <button className="btn btn-login">Iniciar sesion</button>
-                    // </Link>:
-                    // <Link to="/login">
-                    // <button className="btn btn-login">Iniciar sesion</button>
-                    // </Link>
-                    
                     <button className="btn btn-login" onClick={inicioSesion}>Iniciar sesion</button>
                     :
                     <Link to="/login">
