@@ -8,7 +8,6 @@ import { getListUsers } from "../service/user.js";
 import { Link, useNavigate } from "react-router-dom";
 
 export const User = () => {
-  const [stateListUsers, setStateListUsers] = useState([]);
   const [stateFilterUsers, setStateFilterUsers] = useState([]);
   const navigate = useNavigate();
   const {store, dispatch} =useGlobalReducer()
@@ -49,7 +48,7 @@ export const User = () => {
   }
 
   const onFilter = async (user) => {
-    const filtro = stateListUsers.filter(element=>element.slug.toLowerCase().includes(user))
+    const filtro = store.stateListUsers.filter(element=>element.slug.toLowerCase().includes(user))
     setStateFilterUsers(filtro);
     if(user=== ''){
       setStateFilterUsers([])
@@ -58,7 +57,8 @@ export const User = () => {
 
   const getusers = async() =>{
   const result = await getListUsers();
-    setStateListUsers(result)
+    //dispatch({type:"setStateListUsers", payload:Array.isArray(result) ? result : []})
+    dispatch({type:"setStateListUsers", payload:result})
   }
   
   const selectInput = (name) =>{
@@ -85,7 +85,7 @@ export const User = () => {
                 </div>
                 <div>
                   {
-                    stateListUsers.some(user => user.slug === store.stateListUsersPer)?
+                    store.stateListUsers?.some(user => user.slug === store.stateListUsersPer)?
                     <button className="btn btn-login" onClick={inicioSesion}>Iniciar sesion</button>
                     :
                     <Link to="/login">
